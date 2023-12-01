@@ -13,8 +13,9 @@ export class SigninPage implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder, private alertService: AlertService) {
     this.formLogar = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]), 
-      senha: new FormControl('', [Validators.required, Validators.minLength(6)])})
+      email: new FormControl, 
+      senha: new FormControl
+    })
   }
 
   get errorControl(){
@@ -43,6 +44,10 @@ export class SigninPage implements OnInit {
   }
 
   ngOnInit() {
+    this.formLogar = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
+    })
   }
 
 }
