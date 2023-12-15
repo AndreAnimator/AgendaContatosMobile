@@ -12,11 +12,13 @@ import { FirebaseService } from 'src/app/model/services/firebase.service';
 export class HomePage {
 
   public lista_contatos : Contato[] = [];
+  public user: any;
 
   constructor(private firesabe : FirebaseService,
     private router : Router, private AuthSerivce: AuthService) {
-      console.log(this.AuthSerivce.getUserLogged());
-      this.firesabe.read()
+      this.user = this.AuthSerivce.getUserLogged();
+      console.log(this.user);
+      this.firesabe.read(this.user.uid)
       .subscribe(res => {
         this.lista_contatos = res.map(contato =>{
           return{

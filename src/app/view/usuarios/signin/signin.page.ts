@@ -28,6 +28,7 @@ export class SigninPage implements OnInit {
       this.alertService.presentAlert("Erro", "Erro ao preencher os campos!");
       return false;
     }else{
+      this.alertService.simpleLoader();
       this.logar();
       return true;
     }
@@ -36,10 +37,12 @@ export class SigninPage implements OnInit {
   private logar(){
     this.authService.signIn(this.formLogar.value['email'], this.formLogar.value['senha'])
     .then((res)=>{
+      this.alertService.dismissLoader();
       this.alertService.presentAlert("Olá", "Seja bem vindo!");
       this.router.navigate(["home"]); 
     })
     .catch((error)=>{
+      this.alertService.dismissLoader();
       this.alertService.presentAlert("Login", "Erro ao logar");
       console.log(error.message);
     })
